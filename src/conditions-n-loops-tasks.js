@@ -183,6 +183,7 @@ function convertToRomanNumerals(num) {
  *  '10,5'    => 'one zero point five'
  *  '1950.2'  => 'one nine five zero point two'
  */
+
 function convertNumberToString(/* numberStr */) {
   throw new Error('Not implemented');
 }
@@ -306,8 +307,55 @@ function getBalanceIndex(arr) {
  *          [10, 9,  8,  7]
  *        ]
  */
-function getSpiralMatrix(/* size */) {
-  throw new Error('Not implemented');
+// function getSpiralMatrix(/* size */) {
+//   throw new Error('Not implemented');
+// }
+function getSpiralMatrix(size) {
+  const matrix = [];
+  for (let i = 0; i < size; i += 1) {
+    matrix[i] = [];
+    for (let j = 0; j < size; j += 1) {
+      matrix[i][j] = 0;
+    }
+  }
+
+  let currentNumber = 1;
+  let top = 0;
+  let bottom = size - 1;
+  let left = 0;
+  let right = size - 1;
+
+  while (currentNumber <= size * size) {
+    for (let i = left; i <= right; i += 1) {
+      matrix[top][i] = currentNumber;
+      currentNumber += 1;
+    }
+    top += 1;
+
+    for (let i = top; i <= bottom; i += 1) {
+      matrix[i][right] = currentNumber;
+      currentNumber += 1;
+    }
+    right -= 1;
+
+    if (top <= bottom) {
+      for (let i = right; i >= left; i -= 1) {
+        matrix[bottom][i] = currentNumber;
+        currentNumber += 1;
+      }
+      bottom -= 1;
+    }
+
+    if (left <= right) {
+      for (let i = bottom; i >= top; i -= 1) {
+        matrix[i][left] = currentNumber;
+        currentNumber += 1;
+      }
+      left += 1;
+    }
+  }
+
+  return matrix;
 }
 
 /**
