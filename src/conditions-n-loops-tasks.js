@@ -144,21 +144,27 @@ function isIsoscelesTriangle(a, b, c) {
  *  26  => XXVI
  */
 function convertToRomanNumerals(num) {
-  let roman = '';
-  const romanNumList = { X: 10, IX: 9, V: 5, IV: 4, I: 1 };
-  let a;
-  let number = num;
-  if (number < 1 || number > 39) return 'Enter a number between 1 and 39';
+  const keys = ['X', 'IX', 'V', 'IV', 'I'];
+  const values = [10, 9, 5, 4, 1];
 
-  Object.keys(romanNumList).forEach((key) => {
-    a = Math.floor(number / romanNumList[key]);
-    if (a >= 0) {
-      for (let i = 0; i < a; i += 1) {
-        roman += key;
+  let roman = '';
+  let number = num;
+
+  for (let i = 0; i < keys.length; i += 1) {
+    const key = keys[i];
+    const value = values[i];
+
+    while (number >= value) {
+      let j = 0;
+      while (j < key.length) {
+        roman += key[j];
+        j += 1;
       }
+
+      number -= value;
     }
-    number %= romanNumList[key];
-  });
+  }
+
   return roman;
 }
 
@@ -272,7 +278,7 @@ function getBalanceIndex(arr) {
     leftSum += arr[i];
 
     if (leftSum === rightSum) {
-      return arr.indexOf(arr[i + 1]);
+      return i + 1;
     }
   }
 
@@ -319,42 +325,8 @@ function getSpiralMatrix(/* size */) {
  *    [7, 8, 9]         [9, 6, 3]
  *  ]                 ]
  */
-function rotateMatrix(matrix) {
-  const result = [];
-  let top = 0;
-  let bottom = matrix.length - 1;
-  let left = 0;
-  let right = matrix[0].length - 1;
-  while (top <= bottom && left <= right) {
-    for (let i = left; i <= right; i += 1) {
-      result.push(matrix[top][i]);
-    }
-
-    top += 1;
-
-    for (let i = top; i <= bottom; i += 1) {
-      result.push(matrix[i][right]);
-    }
-
-    right -= 1;
-
-    if (top <= bottom) {
-      for (let i = right; i >= left; i -= 1) {
-        result.push(matrix[bottom][i]);
-      }
-
-      bottom -= 1;
-    }
-
-    if (left <= right) {
-      for (let i = bottom; i >= top; i -= 1) {
-        result.push(matrix[i][left]);
-      }
-      left += 1;
-    }
-  }
-
-  return result.join(' ');
+function rotateMatrix(/* matrix */) {
+  throw new Error('Not implemented');
 }
 
 /**
@@ -401,8 +373,7 @@ function sortByAsc(arr) {
  *  'qwerty', 2 => 'qetwry' => 'qtrewy'
  *  '012345', 3 => '024135' => '043215' => '031425'
  *  'qwerty', 3 => 'qetwry' => 'qtrewy' => 'qrwtey'
- */
-function shuffleChar(/* str, iterations */) {
+ */ function shuffleChar(/* str, iterations */) {
   throw new Error('Not implemented');
 }
 
